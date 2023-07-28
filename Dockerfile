@@ -1,5 +1,5 @@
 # DOCKER image to run odoo 14 with Odoo Community Backports and OCA addons
-FROM debian:11.4
+FROM debian:12.1
 MAINTAINER Rubén Cabrera Martínez <dev@rubencabrera.es>
 EXPOSE 8069 8071 8072
 ENV LANG C.UTF-8
