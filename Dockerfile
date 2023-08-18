@@ -100,6 +100,7 @@ RUN python3 -m venv --system-site-packages /opt/venv; \
         passlib \
 	phonenumbers \
 	polib \
+        pysftp \
         pytz \
         psycopg2-binary \
 	twilio \
