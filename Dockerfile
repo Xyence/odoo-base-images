@@ -1,6 +1,6 @@
 # DOCKER image to run odoo 16 with Odoo Community Backports and OCA addons
 FROM debian:12.1
-MAINTAINER Joshua Restivo <jrestivo@xyence.io>
+MAINTAINER Joshua Restivo <jrestivo@jvxtechnology.com>
 EXPOSE 8069 8071 8072
 ENV LANG C.UTF-8
 
