@@ -11,7 +11,7 @@ RUN apt-get update \
     gnupg2 \
     -y
 
-RUN add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" -y; \
+RUN add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" -y; \
     wget --quiet -O - https://postgresql.org/media/keys/ACCC4CF8.asc | \
     apt-key add -
 
