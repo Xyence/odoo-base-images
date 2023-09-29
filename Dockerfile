@@ -1,5 +1,5 @@
 # DOCKER image to run odoo 16 with Odoo Community Backports and OCA addons
-FROM debian:12.1
+FROM debian:bullseye
 MAINTAINER Joshua Restivo <jrestivo@jvxtechnology.com>
 EXPOSE 8069 8071 8072
 ENV LANG C.UTF-8
@@ -11,7 +11,7 @@ RUN apt-get update \
     gnupg2 \
     -y
 
-RUN add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" -y; \
+RUN add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" -y; \
     wget --quiet -O - https://postgresql.org/media/keys/ACCC4CF8.asc | \
     apt-key add -
 
@@ -75,12 +75,18 @@ RUN apt-get update && apt-get install \
         python3-xlwt \
         python3-yaml \
         python3-zeep \
-        wkhtmltopdf \
         xauth \
         xfonts-75dpi \
         xfonts-base \
         xfonts-utils \
         -y
+
+# As/of 09292023, debian 12.1 does not have the necessary version of qt patched into its wkhtmltopdf package.
+# Nor is a pre-built package available from thewkhtmltopdf project
+# We've reverted to debian:bullseye (11) in order to leverage the following package.
+# JaR - 09292023
+RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.bullseye_amd64.deb && \
+        apt install -f ./wkhtmltox_0.12.6.1-2.bullseye_amd64.deb
 
 RUN python3 -m venv --system-site-packages /opt/venv; \
     . /opt/venv/bin/activate; \
